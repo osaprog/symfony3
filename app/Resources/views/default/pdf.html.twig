@@ -1,0 +1,19 @@
+{% extends "layout-pdf.html.twig" %}
+
+{% block content %}
+    
+    <table>
+        <tr><th  colspan="3" >Wöchentliche Liste der Benachrichtigung über Verfügbarkeit</th></tr>
+        <tr style="background-color: #DDD">
+        <th width="100px">Artikel Nr.</th>
+        <th width="300px">Produkt-Titel</th>
+        <th width="50px">Anzahl</th>
+        </tr>
+    
+        {% for result in results %}
+        <tr>
+            <td>{{result.Artikel_Nr}}</td> <td>{{result.Produkt_Titel}}</td> <td>{{result.Anzahl}}</td>
+        </tr>
+        {% endfor %}
+    </table>        
+{% endblock %}
