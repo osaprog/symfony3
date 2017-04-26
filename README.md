@@ -76,3 +76,8 @@ Task Installation:
 - Restore database from task.sql
 - composer install
 - bin/console app:generate-file 1 to generate CSV file, 2 for Json, 3 for XML
+
+
+Running test:
+
+vendor/bin/phpunit src
