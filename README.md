@@ -70,7 +70,7 @@ Enjoy!
 
 
 
-- **Task Installation**:
+**Task Installation**
 
 - composer install
 
@@ -78,18 +78,18 @@ Enjoy!
 
 - php bin/console doctrine:database:create
 
-- **To generate database Entities, run this command:**
+**To generate database Entities, run this command:**
 
-php app/console doctrine:schema:update --force
+- php app/console doctrine:schema:update --force
 
-- **Load Fixtures data for testing:**
+**Load Fixtures data for testing:**
 
-bin/console doctrine:fixtures:load -n
+- bin/console doctrine:fixtures:load -n
 
-- **Run the generate file command utility**:
+**Run the generate file command utility**:
 
-bin/console app:generate-file  // 1 or empty to generate CSV file, 2 for Json, 3 for XML
+- bin/console app:generate-file  // 1 or empty to generate CSV file, 2 for Json, 3 for XML
 
-- **Running unit test**:
+**Running unit test**:
 
-vendor/bin/phpunit src
+- vendor/bin/phpunit src
