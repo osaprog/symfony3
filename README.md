@@ -73,11 +73,20 @@ Enjoy!
 Task Installation:
 
 
-- Restore database from task.sql
 - composer install
-- bin/console app:generate-file 1 to generate CSV file, 2 for Json, 3 for XML
 
+To generate database Entities, run this command:
 
-Running test:
+php app/console doctrine:schema:update --force
+
+Load Fixtures data for testing:
+
+bin/console doctrine:fixtures:load -n
+
+Run the generate file command utility:
+
+bin/console app:generate-file  // 1 or empty to generate CSV file, 2 for Json, 3 for XML
+
+Running unit test:
 
 vendor/bin/phpunit src

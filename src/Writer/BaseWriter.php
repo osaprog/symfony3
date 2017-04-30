@@ -23,7 +23,10 @@ abstract class BaseWriter extends Response implements IWriter{
     public function generate(array $data, $fileName) {
         try{
           $this->fileName = $fileName;
-          $this->data = $data;
+          foreach ($data as $customer){
+            $dataArray[] = array('id'=>$customer->getId(),'name'=>$customer->getName(),'email'=>$customer->getEmail());
+          }
+          $this->data = $dataArray;
           $this->handleData();  
           Generator::dump($this->fileName, $this->getContent());
           return true;

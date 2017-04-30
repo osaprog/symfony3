@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
-
+use WriterBundle\Entity\Customer;
 class GenerateFilesCommand extends ContainerAwareCommand {
 
     protected function configure() {
@@ -34,12 +34,8 @@ class GenerateFilesCommand extends ContainerAwareCommand {
      */
     protected function execute(InputInterface $input, OutputInterface $output) {
 
-        $em = $this->getContainer()->get('doctrine')->getManager();
-        $connection = $em->getConnection();
-        $statement = $connection->prepare("SELECT* FROM customers");
-        $statement->execute();
-
-        $results = $statement->fetchAll();
+        $repository = $this->getContainer()->get('doctrine.orm.entity_manager')->getRepository(Customer::class);
+        $customers = $repository->findAll();
 
         $format = $input->getArgument('format');
         switch ($format) {
@@ -55,8 +51,8 @@ class GenerateFilesCommand extends ContainerAwareCommand {
                 $fileGenerateService = $this->getContainer()->get('writer.csv');
                 $fileExtension = 'csv';
         }
-        if ($fileGenerateService && $results) {
-            $fileGenerateService->generate($results, sprintf('test-%s.%s', date('Y-m-d'), $fileExtension));
+        if ($fileGenerateService && $customers) {
+            $fileGenerateService->generate($customers, sprintf('test-%s.%s', date('Y-m-d'), $fileExtension));
         }
     }
 
