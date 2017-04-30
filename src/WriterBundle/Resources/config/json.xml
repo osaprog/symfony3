@@ -6,10 +6,19 @@
 
     <parameters>
         <parameter key="writer.json.class">Writer\JsonWriter</parameter>
+        <parameter key="writer.json.extension">json</parameter>
+        <parameter key="customer.repository.class">WriterBundle\Entity\Repository\CustomerRepository</parameter>        
     </parameters>
 
     <services>
+        <service id="customer.repository" class="%customer.repository.class%">
+                <factory service="doctrine.orm.default_entity_manager" method="getRepository" />
+                <argument>WriterBundle:Customer</argument>
+        </service>
+
         <service id="writer.json" class="%writer.json.class%">
+            <argument>%writer.json.extension%</argument>
+            <argument type="service" id="customer.repository" />
         </service>
     </services>
 

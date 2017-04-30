@@ -6,10 +6,19 @@
 
     <parameters>
         <parameter key="writer.xml.class">Writer\XmlWriter</parameter>
+        <parameter key="writer.xml.extension">xml</parameter>
+        <parameter key="customer.repository.class">WriterBundle\Entity\Repository\CustomerRepository</parameter>
     </parameters>
 
     <services>
+        <service id="customer.repository" class="%customer.repository.class%">
+                <factory service="doctrine.orm.default_entity_manager" method="getRepository" />
+                <argument>WriterBundle:Customer</argument>
+        </service>
+
         <service id="writer.xml" class="%writer.xml.class%">
+            <argument>%writer.xml.extension%</argument>
+            <argument type="service" id="customer.repository" />
         </service>
     </services>
 

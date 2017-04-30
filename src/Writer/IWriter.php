@@ -4,6 +4,6 @@ namespace Writer;
 
 interface IWriter{
     
-    public function generate(array $data, $fileName);
+    public function generate();
     
 }

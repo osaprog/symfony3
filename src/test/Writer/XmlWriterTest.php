@@ -2,17 +2,21 @@
 
 namespace Writer;
 
-class XmlWriterTest extends \PHPUnit_Framework_TestCase
-{
-    public function testCreateInstance()
-    {
-         $testObject = $this->getMock('Writer\XmlWriter');
-         $this->assertInstanceOf('Writer\XmlWriter', $testObject);
+class XmlWriterTest extends \PHPUnit_Framework_TestCase {
+
+    public function testCreateInstance() {
+        $this->assertInstanceOf('Writer\XmlWriter', $this->_getTestObject());
     }
 
-    public function testHandleData()
-    {
-        $testObject = $this->getMock('Writer\XmlWriter');
-        $testObject->handleData(array('foo'=>'bar'),'test.xml');
+    private function _getTestObject() {
+        $repoStub = $this->getMockBuilder('WriterBundle\Entity\Repository\CustomerRepository')
+                ->disableOriginalConstructor()
+                ->disableOriginalClone()
+                ->disableArgumentCloning()
+                ->getMock();
+        return $this->getMockBuilder('Writer\XmlWriter')
+                        ->setConstructorArgs(array('xml', $repoStub))
+                        ->getMock();
     }
+
 }

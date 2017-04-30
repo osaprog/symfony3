@@ -5,6 +5,7 @@ namespace Writer;
 class XmlWriter extends BaseWriter{
 
     public function handleData() {
+        try{
         $xml = new \SimpleXMLElement('<root/>');
         array_walk_recursive($this->data, function($value, $key)use($xml) {
             $xml->addChild($key, htmlspecialchars($value));
@@ -16,6 +17,10 @@ class XmlWriter extends BaseWriter{
             $this->headers->set('Content-Type', 'xml');
         }
         $this->setContent($this->data);
+           return TRUE;
+        }  catch (Exception $e){
+            return FALSE;
+        }
     }
 
 }

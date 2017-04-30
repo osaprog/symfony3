@@ -27,32 +27,26 @@ class GenerateFilesCommand extends ContainerAwareCommand {
                         . ' print for CSV 1, for Json 2, for XML 3 Ex. app:generate-file 1 for CSV. Default is CSV')
         ;
     }
-    /**
-     * 
+    
+    /** 
      * @param InputInterface $input
      * @param OutputInterface $output
      */
     protected function execute(InputInterface $input, OutputInterface $output) {
 
-        $repository = $this->getContainer()->get('doctrine.orm.entity_manager')->getRepository(Customer::class);
-        $customers = $repository->findAll();
-
         $format = $input->getArgument('format');
         switch ($format) {
             case 2:
                 $fileGenerateService = $this->getContainer()->get('writer.json');
-                $fileExtension = 'json';
-                break;
+                 break;
             case 3:
                 $fileGenerateService = $this->getContainer()->get('writer.xml');
-                $fileExtension = 'xml';
-                break;
+                 break;
             default:
-                $fileGenerateService = $this->getContainer()->get('writer.csv');
-                $fileExtension = 'csv';
-        }
-        if ($fileGenerateService && $customers) {
-            $fileGenerateService->generate($customers, sprintf('test-%s.%s', date('Y-m-d'), $fileExtension));
+                $fileGenerateService = $this->getContainer()->get('writer.csv');    
+         }
+        if ($fileGenerateService) {
+            $fileGenerateService->generate();
         }
     }
 

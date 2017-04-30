@@ -6,11 +6,20 @@
 
     <parameters>
         <parameter key="writer.csv.class">Writer\CsvWriter</parameter>
+        <parameter key="writer.csv.extension">csv</parameter>
+        <parameter key="customer.repository.class">WriterBundle\Entity\Repository\CustomerRepository</parameter>        
     </parameters>
 
     <services>
-        <service id="writer.csv" class="%writer.csv.class%" >
+        <service id="customer.repository" class="%customer.repository.class%" public="false">
+                <factory service="doctrine.orm.default_entity_manager" method="getRepository" />
+                <argument>WriterBundle\Entity\Customer</argument>
         </service>
-    </services>
+
+        <service id="writer.csv" class="%writer.csv.class%" >
+             <argument>%writer.csv.extension%</argument>
+             <argument type="service" id="customer.repository" />
+        </service>
+    </services> 
 
 </container>

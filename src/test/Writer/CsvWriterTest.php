@@ -2,17 +2,21 @@
 
 namespace Writer;
 
-class CsvWriterTest extends \PHPUnit_Framework_TestCase
-{
-    public function testCreateInstance()
-    {
-         $testObject = $this->getMock('Writer\CsvWriter');
-         $this->assertInstanceOf('Writer\CsvWriter', $testObject);
+class CsvWriterTest extends \PHPUnit_Framework_TestCase {
+
+    public function testCreateInstance() {
+        $this->assertInstanceOf('Writer\CsvWriter', $this->_getTestMockObject());
     }
 
-    public function testHandleData()
-    {
-        $testObject = $this->getMock('Writer\CsvWriter');
-        $testObject->handleData(array('foo'=>'bar'),'test.csv');
+    private function _getTestMockObject() {
+        $repoStub = $this->getMockBuilder('WriterBundle\Entity\Repository\CustomerRepository')
+                ->disableOriginalConstructor()
+                ->disableOriginalClone()
+                ->disableArgumentCloning()
+                ->getMock();
+        return $this->getMockBuilder('Writer\CsvWriter')
+                        ->setConstructorArgs(array('csv', $repoStub))
+                        ->getMock();
     }
+
 }
