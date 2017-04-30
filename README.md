@@ -72,7 +72,11 @@ Enjoy!
 
 - **Task Installation**:
 
-composer install
+- composer install
+
+- edit file app/config/parameters.yml, and put the database connection values
+
+- php bin/console doctrine:database:create
 
 - **To generate database Entities, run this command:**
 
