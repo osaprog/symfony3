@@ -70,9 +70,9 @@ Enjoy!
 
 
 
-Task Installation:
+- **Task Installation**:
 
-- composer install
+composer install
 
 - **To generate database Entities, run this command:**
 
